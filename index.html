@@ -1,0 +1,599 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Заставь свое Backbone приложение танцевать!</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		.slide h2 {
+			margin-top: -40px;
+			margin-bottom: 25px;
+		}
+		.mycover h2 {
+			margin:-50px 0 0 -100px;
+			color:#FFF;
+			font-size:70px;
+			}
+		.mycover p {
+			margin:10px 0 0 -100px;
+			color:#FFF;
+			font-style:italic;
+			font-size:20px;
+			}
+			.mycover p a {
+				color:#FFF;
+				border-bottom: 0;
+				}
+		#Picture h2 {
+			color:#FFF;
+			}
+		#SeeMore h2 {
+			font-size:100px
+			}
+		#SeeMore img {
+			width:0.72em;
+			height:0.72em;
+			}
+		pre.lot {
+			font-size: 22px;
+		}
+		pre.lot code {
+			line-height: 36px;
+		}
+		pre.tooMuch {
+			font-size: 16px;
+		}
+		pre.tooMuch code {
+			line-height: 26px;
+		}
+		#memory-fail h2 {
+			color: red;
+			font-size: 180px;
+			margin: 10px;
+			text-align: center;
+		}
+		pre.no-line-numbers code:before { content:''; }
+		.links a { border-bottom: 0; }
+
+		ul li { line-height: 1.7em; margin-bottom: 0.2em; }
+
+		.slide pre mark.highlight {
+			background: transparent;
+		}
+		.slide pre mark.highlight.active {
+			background: #F7FCA0;
+		}
+
+		.logos  h2 {
+			margin-bottom: 60px;
+		}
+		.logos .logo {
+			float: left;
+			margin-right: 40px;
+			width: 200px;
+			height: 120px;
+		}
+		.logos img {
+			width: 200px;
+		}
+		.logos p {
+			clear: left;
+			text-align: right;
+		}
+
+		.chaplin .logo {
+			width: 200px;
+			position: absolute;
+			top: 70px;
+			right: 200px;
+		}
+		.thorax .logo {
+			width: 200px;
+			position: absolute;
+			top: 70px;
+			right: 200px;
+		}
+		.marionette .logo {
+			width: 100px;
+			position: absolute;
+			top: 5px;
+			right: 200px;
+		}
+
+		.slide pre mark.highlight {
+			padding:0;
+		}
+		.slide pre mark.highlight.active {
+			padding:3px 8px;
+		}
+	</style>
+</head>
+
+<!-- Возможно отображать логотипы на слайдах плагинов -->
+
+<body class="list">
+	<header class="caption">
+		<h1>Заставь свое Backbone приложение танцевать!</h1>
+		<p><a href="http://smacker.ru">Maxim Sukharev</a>, Ideco.</p>
+	</header>
+	<section class="slide cover mycover"><div>
+		<h2>Заставь своё приложение танцевать!</h2>
+		<p><a href="http://smacker.ru">Сухарев Максим</a>, Айдеко</p>
+		<img src="pictures/cover.jpg" alt="">
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Почему клиент становится «толще»?</h2>
+		<p style="font-size:34px;"><strong>Лучший user experience</strong> — пользователь привык к одностраничным приложениям</p>
+		<ul style="float:left;width:40%;margin-left:10%;">
+			<li>Gmail</li>
+			<li>VK</li>
+			<li>LinguaLeo</li>
+		</ul>
+		<ul style="float:left;width:40%;">
+			<li>Evernote</li>
+			<li>Google Reader/Feedly</li>
+			<li>Facebook</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Почему клиент становится «толще»?</h2>
+		<p style="font-size:38px;margin-top:100px;"><strong>Уменьшаем время ожидания</strong> — загружаем только то, что нужно, переиспользуем данные</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Почему клиент становится «толще»?</h2>
+		<p style="font-size:42px;margin-top:100px;"><strong>Реагируем вовремя</strong><br>— валидация, всплывающие формы</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Почему клиент становится «толще»?</h2>
+		<p style="font-size:42px;margin-top:100px;"><strong>Фоновые процессы</strong><br> — плеер, чат, уведомления</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Почему клиент становится «толще»?</h2>
+		<p style="font-size:38px;margin-top:100px;"><strong>Разделение логики</strong> — js программист может сосредоточиться на логике представления, а backend на системных вещах</p></p>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Три типа приложений</h2>
+		<ol>
+			<li>Замена <strong>десктоп</strong>-приложения.</li>
+			<li><strong>Мобильное</strong> приложение.</li>
+			<li>Веб-сайт с <strong>плюшками</strong>.</li>
+		</ol>
+		<p><strong>Результат один:</strong> много данных, много кода, много селекторов, много callback'ов. С привычным jQuery и vanillajs становится сложно.</p>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Что делать?</h2>
+		<ul>
+			<li>Перестать хранить данные в DOM'е</li>
+			<li>Разделить логику
+				<ul>
+					<li>работа с данными</li>
+					<li>шаблонизация</li>
+					<li>связь данных и шаблона</li>
+				</ul>
+			</li>
+			<li>Вспомнить про History API</li>
+			<li>RESTful API</li>
+			<li>Начать использовать сборщик</li>
+		</ul>
+	</div></section>
+	<section class="slide" style="font-size:26px;"><div>
+		<h2>Backbone.js</h2>
+		<p>Небольшая библиотека кирпичиков для структурированной разработки</p>
+		<ul>
+			<li><strong>Models</strong> — данные которые можно создавать, удалять, изменять, валидировать и синхронизировать с сервером</li>
+			<li><strong>Collections</strong> — набор моделей с удобным API</li>
+			<li><strong>Views</strong> — элементы интерфейса отображающие состояние модели</li>
+			<li><strong>Events</strong> — примесь, позволяет слушать и вызывать события</li>
+			<li><strong>Router</strong> — роутинг на стороне клиента</li>
+		</ul>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Больше конкретики</h2>
+		<p>Backbone следит за тем, чтобы ваши данные на всех трех уровнях были синхронизованны</p>
+		<p>
+			<span class="next"><strong>Нажатие</strong> на ссылку →</span>
+			<span class="next"><strong>Роутер</strong> →</span>
+			<span class="next"><strong>Сервер</strong> →</span>
+			<span class="next"><strong>Коллекция\модель</strong> →</span>
+			<span class="next"><strong>Представление</strong> →<br></span>
+			<span class="next">Клиент <strong>взаимодействует</strong> с UI →</span>
+			<span class="next"><strong>Модель</strong> →</span>
+			<span class="next"><strong>Cервер</strong></span>
+		</p>
+	</div></section>
+	<section class="slide cover h"><div>
+		<img src="pictures/todo.png" alt="">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Model</h2>
+		<pre>
+			<code><span style="color:#ff5600">var</span> Todo <span style="color:#ff5600">=</span> Backbone.Model.extend({</code>
+			<code>  <span style="color:#21439c">defaults</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    <span style="color:#ff5600">return</span> {</code>
+			<code>      title: <span style="color:#00a33f">''</span>,</code>
+			<code>      completed: <span style="color:#a535ae">false</span></code>
+			<code>    };</code>
+			<code>  },</code>
+			<code>  ...</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Model валидация</h2>
+		<pre>
+			<code>  ...</code>
+			<code>  <span style="color:#21439c">validate</span>: <span style="color:#ff5600">function</span>(attrs, options) {</code>
+			<code>    <span style="color:#ff5600">if</span> (attrs.title.length <span style="color:#ff5600">&lt;</span> 3) {</code>
+			<code>      <span style="color:#ff5600">return</span> <span style="color:#00a33f">'Задача должна быть длинее 3х символов!'</span>;</code>
+			<code>    };</code>
+			<code>  },</code>
+			<code>  ...</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Model</h2>
+		<pre>
+			<code>  ...</code>
+			<code>  <span style="color:#21439c">toggle</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    this.save({completed: <span style="color:#ff5600">!</span>this.get(<span style="color:#00a33f">'completed'</span>)});</code>
+			<code>  }</code>
+			<code>});</code>
+		</pre>
+		<p style="font-size:32px;"><strong>Методы:</strong> get, set, has, clear, changed, fetch, save, destroy, validate, url, ...</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Collection</h2>
+		<p style="font-size:30px;">Упорядочное множество моделей</p>
+		<pre>
+			<code><span style="color:#ff5600">var</span> TodoList <span style="color:#ff5600">=</span> Backbone.Collection.extend({</code>
+			<code>  url: <span style="color:#00a33f">'/api/v1/todo'</span>,</code>
+			<code>  model: Todo,</code>
+			<code>  ...</code>
+		</pre>
+		<p style="font-size:30px;">События модели будут вызваны и на коллекции</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Collection</h2>
+		<pre>
+			<code>  <span style="color:#21439c">completed</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    <span style="color:#919191">// 28 методов underscore.js</span></code>
+			<code>    <span style="color:#ff5600">return</span> this.where({completed: <span style="color:#a535ae">true</span>});</code>
+			<code>  },</code>
+			<code>  <span style="color:#21439c">createCompleted</span>: <span style="color:#ff5600">function</span>(params) {</code>
+			<code>    params <span style="color:#ff5600">=</span> _.defaults(params <span style="color:#ff5600">||</span> {}, {completed: <span style="color:#a535ae">true</span>});</code>
+			<code>    this.create(params);</code>
+			<code>  }</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>REST</h2>
+		<pre class="lot">
+			<code>myCollection <span style="color:#ff5600">=</span> <span style="color:#ff5600">new</span> <span style="color:#21439c">MyCollection</span>();</code>
+			<code> </code>
+			<code><span style="color:#919191">// GET '/api/v1/myobject'</span></code>
+			<code>myCollection.fetch();</code>
+			<code> </code>
+			<code><span style="color:#919191">// POST '/api/v1/myobject'</span></code>
+			<code>myModel <span style="color:#ff5600">=</span> myCollection.create();</code>
+			<code> </code>
+			<code><span style="color:#919191">// PUT '/api/v1/myobject/id'</span></code>
+			<code>myModel.save();</code>
+			<code> </code>
+			<code><span style="color:#919191">// DELETE '/api/v1/myobject/id'</span></code>
+			<code>myModel.destroy();</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>View</h2>
+		<p style="font-size:30px;">Представление данных в виде DOM элементов</p>
+		<pre>
+			<code><span style="color:#ff5600">var</span> TodoView <span style="color:#ff5600">=</span> Backbone.View.extend({</code>
+			<code>  tagName: <span style="color:#00a33f">'li'</span>,</code>
+			<code>  className: <span style="color:#00a33f">'row'</span>,</code>
+			<code>  template: _.template(<span style="color:#ff5600">$</span>(<span style="color:#00a33f">'#item-template'</span>).html()),</code>
+			<code>  ...</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>View и события</h2>
+		<pre>
+			<code>  events: {</code>
+			<code>    <span style="color:#00a33f">'dblclick label'</span>: <span style="color:#00a33f">'edit'</span>,</code>
+			<code>    <span style="color:#00a33f">'click .destroy'</span>: <span style="color:#00a33f">'clear'</span></code>
+			<code>  },</code>
+			<code> </code>
+			<code>  <span style="color:#21439c">initialize</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    this.listenTo(this.model, <span style="color:#00a33f">'change'</span>, this.render);</code>
+			<code>    this.listenTo(this.model, <span style="color:#00a33f">'destroy',</span>, this.remove);</code>
+			<code>  },</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>View отображение</h2>
+		<p style="font-size:30px;">Пустой метод, который нужно заполнить, возвращает this.</p>
+		<pre>
+			<code>  <span style="color:#21439c">render</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    <span style="color:#ff5600">var</span> html <span style="color:#ff5600">=</span> this.template(this.model.toJSON());</code>
+			<code>    this.<span style="color:#ff5600">$</span>el.html(html);</code>
+			<code>    <span style="color:#ff5600">return</span> this;</code>
+			<code>  }</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Route</h2>
+		<p style="font-size:30px;">Client-side маршрутизация.</p>
+		<pre>
+			<code><span style="color:#ff5600">var</span> TodoRouter <span style="color:#ff5600">=</span> Backbone.Router.extend({</code>
+			<code>  routes: {</code>
+			<code>    <span style="color:#00a33f">'todo'</span>: <span style="color:#00a33f">'showTodoList'</span>,</code>
+			<code>    <span style="color:#00a33f">'todo/filter/:filter'</span>: <span style="color:#00a33f">'showTodoList'</span>,</code>
+			<code>    <span style="color:#00a33f">'todo/new'</span>: <span style="color:#00a33f">'createTodo'</span></code>
+			<code>  },</code>
+			<code>  ...</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Route</h2>
+		<pre>
+			<code>  <span style="color:#21439c">initialize</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    this.todoList <span style="color:#ff5600">=</span> <span style="color:#ff5600">new</span> <span style="color:#21439c">TodoList</span>();</code>
+			<code>  },</code>
+			<code>  <span style="color:#21439c">showTodoList</span>: <span style="color:#ff5600">function</span>(filter) {</code>
+			<code>    filter <span style="color:#ff5600">=</span> filter <span style="color:#ff5600">||</span> <span style="color:#00a33f">''</span>;</code>
+			<code>    this.todoList.fetch({filter: filter});</code>
+			<code>    <span style="color:#ff5600">var</span> view <span style="color:#ff5600">=</span> <span style="color:#ff5600">new</span> <span style="color:#21439c">TodoView</span>({collection: this.todoList});</code>
+			<code>    view.render();</code>
+			<code>  },</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Route</h2>
+		<pre>
+			<code>  ...</code>
+			<code>  <span style="color:#21439c">createObject</span>: <span style="color:#ff5600">function</span>() {</code>
+			<code>    this.todoList.create({title: <span style="color:#00a33f">'New object'</span>});</code>
+			<code>  }</code>
+			<code>});</code>
+			<code> </code>
+			<code><span style="color:#919191">// Запускаем приложение</span></code>
+			<code><span style="color:#ff5600">var</span> router = <span style="color:#ff5600">new</span> <span style="color:#21439c">TodoRouter</span>();</code>
+		</pre>
+	</div></section>
+	<section class="slide logos"><div>
+		<h2>Кто использует?</h2>
+		<div class="logo"><img src="pictures/logos/linkedin.png" alt="LinkedIn"></div>
+		<div class="logo"><img src="pictures/logos/Wordpress.png" alt="Wordpress"></div>
+		<div class="logo"><img src="pictures/logos/BitBucket.png" alt="Bitbucket"></div>
+		<div class="logo"><img src="pictures/logos/foursquare.png" alt="Foursquare"></div>
+		<div class="logo"><img src="pictures/logos/disqus.gif" alt="Disqus"></div>
+		<div class="logo"><img src="pictures/logos/walmart.jpg" alt="Walmart"></div>
+		<div class="logo"><img src="pictures/logos/basecamp.png" alt="Basecamp"></div>
+		<div class="logo"><img src="pictures/logos/pandora.jpg" alt="Pandora"></div>
+		<p>и многие другие</p>
+	</div></section>
+	<section class="slide" style="font-size:36px;"><div>
+		<h2>Плагины</h2>
+		<figure style="margin-top:80px;">
+			<blockquote>
+				<p>Building Backbone.js applications without the use of plugins, add-ons and project-specific abstractions is a waste of time and money.</p>
+			</blockquote>
+			<figcaption>Derick Bailey</figcaption>
+		</figure>
+	</div></section>
+	<section class="slide"><div>
+		<h2>ModelBinder</h2>
+		<p>Автоматическая связь DOM-элементов с атрибутами модели</p>
+		<pre>
+			<code>&lt;<span style="color:#bf4f24">input</span> <span style="color:#bf4f24">type</span>=<span style="color:#0b6125">"text"</span> <span style="color:#bf4f24">name</span>=<span style="color:#0b6125">"address"</span>/></code>
+		</pre>
+		<pre class="no-line-numbers">
+			<code>SomeView <span style="color:#ff5600">=</span> Backbone.View.extend({</code>
+			<code>    <span style="color:#21439c">render</span>: <span style="color:#ff5600">function</span>(){</code>
+			<code>        this.<mark class="highlight">modelBinder.bind</mark>(this.model, this.el);</code>
+			<code>    }</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Rivets.js</h2>
+		<p>Одно и двух-сторонние привязки, итерационные привязки, вычисляемые свойства, возможность форматирования</p>
+		<pre class="tooMuch" style="margin-top:-30px;">
+			<code>&lt;div id<span style="color:#794938">=</span>"auction"></code>
+			<code>  &lt;h1 <span style="color:#bf4f24">data-text</span>=<span style="color:#0b6125">"auction.title"</span>>&lt;/h1></code>
+			<code>  &lt;img <span style="color:#bf4f24">data-src</span>=<span style="color:#0b6125">"image.url"</span>></code>
+			<code></code>
+			<code>  &lt;div class='info' <mark class="highlight"><span style="color:#bf4f24">data-show</span></mark>=<span style="color:#0b6125">'auction.endingSoon'</span>></code>
+			<code>    &lt;p>Hurry up! This auction is ending soon.&lt;/p></code>
+			<code>  &lt;/div></code>
+			<code></code>
+			<code>  &lt;dl></code>
+			<code>    &lt;dt>Current Bid&lt;/dt></code>
+			<code>    &lt;dd <span style="color:#bf4f24">data-text</span>=<mark class="highlight"><span style="color:#0b6125">'auction.currentBid | money'</span></mark>>&lt;/dd></code>
+			<code>    &lt;dt>Time left&lt;/dt></code>
+			<code>    &lt;dt <span style="color:#bf4f24">data-text</span>=<span style="color:#0b6125">'auction.remaining | time'</span>>&lt;/dt></code>
+			<code>  &lt;/dl></code>
+			<code>&lt;/div></code>
+		</pre>
+	</div></section>
+	<section class="slide" style="font-size:34px;"><div>
+		<h2>Backbone-forms</h2>
+		<ul style="margin-top:70px;">
+			<li>Автогенерируемые формы по схеме</li>
+			<li>Валидация</li>
+			<li>Вложенные формы</li>
+			<li>Сложные и кастомные редакторы</li>
+			<li>Шаблонизация</li>
+		</ul>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Backbone-forms</h2>
+		<pre class="lot">
+			<code><span style="color:#ff5600">var</span> User <span style="color:#ff5600">=</span> Backbone.Model.extend({</code>
+			<code>    <mark class="highlight">schema</mark>: {</code>
+			<code>        <mark class="highlight">title</mark>:      { type: <span style="color:#00a33f">'Select'</span>, options: [<span style="color:#00a33f">'Mr'</span>, <span style="color:#00a33f">'Ms'</span>] },</code>
+			<code>        name:       <mark class="highlight"><span style="color:#00a33f">'Text'</span></mark>,</code>
+			<code>        email:      { validators: [<mark class="highlight"><span style="color:#00a33f">'required'</span>, <span style="color:#00a33f">'email'</span></mark>] },</code>
+			<code>        notes:      { type: <span style="color:#00a33f"><mark class="highlight">'List'</mark></span>, listType: <span style="color:#00a33f">'Text'</span> }</code>
+			<code>    }</code>
+			<code>});</code>
+			<code> </code>
+			<code><span style="color:#ff5600">var</span> model <span style="color:#ff5600">=</span> <span style="color:#ff5600">new</span> <span style="color:#21439c">User</span>();</code>
+			<code><span style="color:#ff5600">var</span> form <span style="color:#ff5600">=</span> <span style="color:#ff5600">new</span> <span style="color:#21439c">Backbone.Form</span>({ model: model }).render();</code>
+			<code><mark class="highlight">form.el</mark>; <span style="color:#919191">// Тут лежит HTML на который навешаны события</span></code>
+		</pre>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Backbone-relational</h2>
+		<p>В моделях бэкбона нет связей</p>
+		<p><strong>Вкусности:</strong><br>Один-к-одному, один-ко-многим и многие-ко-многим отношения в моделях, ленивая загрузка и автоматическая конвертация</p>
+	</div></section>
+	<section class="slide"><div>
+		<pre style="margin-top:-70px;">
+			<code> House <span style="color:#ff5600">=</span> Backbone.RelationalModel.extend({</code>
+			<code>  <mark class="highlight">relations</mark>: [</code>
+			<code>    {</code>
+			<code>      type: <mark class="highlight">Backbone.HasMany</mark>,</code>
+			<code>      <mark class="highlight">key</mark>: <span style="color:#00a33f">'occupants'</span>,</code>
+			<code>      relatedModel: <span style="color:#00a33f"><mark class="highlight">'Person'</mark></span>,</code>
+			<code>      <mark class="highlight">includeInJSON</mark>: Backbone.Model.<span style="color:#a535ae">prototype</span>.idAttribute,</code>
+			<code>      collectionType: <span style="color:#00a33f"><mark class="highlight">'PersonCollection'</mark></span>,</code>
+			<code>      <mark class="highlight">reverseRelation</mark>: { key: <span style="color:#00a33f">'livesIn'</span> }</code>
+			<code>    }</code>
+			<code>  ]</code>
+			<code>});</code>
+		</pre>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Пример</h2>
+		<pre style="margin-top:80px;">
+			<code><span style="color:#ff5600">var</span> persons <span style="color:#ff5600">=</span> PersonCollection();</code>
+			<code>presons.fetch({someFilter: 1}); <span style="color:#919191">// 2, 10</span></code>
+			<code><span style="color:#ff5600">var</span> house <span style="color:#ff5600">=</span> House({id: 5});</code>
+			<code>house.fetch(); <span style="color:#919191">// occupants [2,10,8]</span></code>
+			<code><span style="color:#919191">// С сервера подтянулся только житель с id=8</span></code>
+			<code>house.get(<span style="color:#00a33f">'occupants'</span>).get(10); <span style="color:#919191">// Модель</span></code>
+		</pre>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Large scale web application</h2>
+		<p><strong>Масштабируемость</strong> — насколько просто в приложение добавить новую фичу, насколько сложно модифицировать код под изменившиеся условия</p>
+		<p>Когда JS кода становится очень много, приходит пора искать <strong>фреймворк</strong></p>
+	</div></section>
+	<section class="slide" style="font-size:34px;"><div>
+		<h2>Зачем</h2>
+		<ul style="margin-top:80px;">
+			<li>Не писать шаблонный-код</li>
+			<li>Разметка и регионы</li>
+			<li>Управление памятью</li>
+			<li>Модульность</li>
+			<li>Архитектура и паттерны</li>
+		</ul>
+	</div></section>
+	<section class="slide" style="font-size:34px;"><div>
+		<h2>Не писать шаблонный-код</h2>
+		<p>Backbone.View — скорее просто <strong>конвенция</strong>, а не полноценное представление</p>
+		<p>Чтобы не изобретать велосипед каждый раз, фреймворк должен давать <strong>базовые</strong> View классы</p>
+	</div></section>
+	<section class="slide" style="font-size:36px;"><div>
+		<h2>Разметка и регионы</h2>
+		<p>С ростом проекта растет количество View и управлять ими становится сложно</p>
+		<p>Любую страницу можно поделить на регионы, создать макет</p>
+	</div></section>
+	<section class="slide" style="font-size:32px;"><div>
+		<h2>Управление памятью</h2>
+		<p>Важно следить за тем чтобы все объекты корректно <strong>закрывались</strong> и <strong>удалялись</strong></p>
+		<p>Стандартные действия фреймворк должен делать <strong>сам</strong></p>
+		<p>И давать <strong>хук</strong> по которому разработчик может почистить за собой</p>
+	</div></section>
+	<section class="slide" style="font-size:30px;"><div>
+		<h2>Модульность</h2>
+		<p><strong>Небольшие</strong>, <strong>инкапсулированные</strong> модули, сфокусированные на выполнении <strong>определенной задачи</strong></p>
+		<p>Есть <strong>RequireJS</strong>, но иногда хочется большего</p>
+		<p>Необходим <strong>механизм инициализации</strong> и <strong>остановки</strong> модулей</p>
+	</div></section>
+	<section class="slide" style="font-size:30px;"><div>
+		<h2>Коммуникации</h2>
+		<p>Модули должны <strong>взаимодействовать</strong> друг с другом</p>
+		<ul style="float:left;width:50%;">
+			<li>Event Aggregator</li>
+			<li>Publish/Subscribe</li>
+			<li>Mediator</li>
+			<li>Commands</li>
+		</ul>
+		<p style="float:left;width:40%;padding-top:25px;text-align:center;">На самом деле<br>примерно<br>одно и то же</p>
+	</div></section>
+	<section class="slide" style="font-size:30px;"><div>
+		<h2>Надстройки</h2>
+		<ul>
+			<li><strong>LayoutManager</strong> — управление макетами и шаблонами</li>
+			<li><strong>Chaplin</strong> — легковесная и гибкая структура для вашего приложения на основе популярных паттернов</li>
+			<li><strong>Thorax</strong> — решающий за вас, проверенный в бою фреймворк для создания больших веб приложений</li>
+			<li><strong>Marionette.js</strong> — архитектура и коллекции паттернов, делает жизнь разработчика проще</li>
+		</ul>
+	</div></section>
+	<section class="slide" style="font-size:28px;"><div>
+		<h2>LayoutManager</h2>
+		<p>Когда не нужны средства для сложной архитектуры,<br> модули и все эти абстракции</p>
+		<ul>
+			<li>Полный жизненный цикл шаблонов</li>
+			<li>Структурированные макеты</li>
+			<li>Очистка представлений</li>
+			<li>API для вложенных View</li>
+			<li>Максимально прост в интеграции</li>
+		</ul>
+	</div></section>
+	<section class="slide chaplin"><div>
+		<h2>Chaplin</h2>
+		<img src="pictures/coffeescript.png" alt="" class="logo">
+		<ul>
+			<li><strong>Удобное наследование</strong> — автоматическое слияние декларативно-описанных событий</li>
+			<li><strong>Управление памятью</strong> — следит за корректным уничтожением объектов</li>
+			<li><strong>Модульность</strong> — заставляет использовать RequireJS, нет высокоуровневых абстракций, только контроллеры, инициализаторы присутствуют</li>
+			<li><strong>Коммуникации</strong> — Dispatcher, EventBroker реализующий Pub/Sub, высокоуровневый Mediator — общая шина</li>
+			<li><strong>Layout, умные View и CollectionView</strong> – необходимая база</li>
+		</ul>
+		<!-- TODO: Добавить картинку CoffeeScript -->
+	</div></section>
+	<section class="slide thorax" style="font-size:28px;"><div>
+		<h2>Thorax</h2>
+		<img src="pictures/logos/walmart.jpg" alt="" class="logo">
+		<ul>
+			<li style="margin-bottom:10px;"><strong>Handlebars</strong> – шаблонный помощник на каждый случай</li>
+			<li style="margin-bottom:10px;">Свои модели и коллекции</li>
+			<li style="margin-bottom:10px;">Удобный и гибкий <strong>базовый View</strong>, <strong>Layouts</strong></li>
+			<li style="margin-bottom:10px;"><strong>Интеграция с jQuery &amp; Zepto</strong> – по элементу можно получить модель, коллекцию или объект представления</li>
+			<li style="margin-bottom:10px;">Наследуемые события</li>
+			<li style="margin-bottom:10px;"><strong>Form Handling</strong> — просто превращаем формы в модели и обратно, хук для валидации</li>
+		</ul>
+		<!-- добавить лого Walmart -->
+	</div></section>
+	<section class="slide marionette" style="font-size:28px;"><div>
+		<h2>Marionette.js</h2>
+		<img src="pictures/marionette.png" alt="" class="logo">
+		<p>Архитектура для приложения, коллекция паттернов, нет привязки к шаблонному движку, не обязательно использовать все модули</p>
+		<ul>
+			<li><strong>Views</strong> — ItemView, CollectionView, CompositeView, Layout</li>
+			<li><strong>View Management</strong> — Region, RegionManagement</li>
+			<li><strong>Infrastructure</strong> — Application, Module, Controller.</li>
+			<li><strong>Object-Messaging</strong> — EventAggregator, RequestResponse, Commands</li>
+		</ul>
+		<!-- добавить лого -->
+	</div></section>
+	<section class="slide links"><div>
+		<h2>Подробнее</h2>
+		<p><strong>Backbone:</strong> <a href="http://backbonejs.org">Документация</a>, <a href="http://backbonejs.org/#examples">примеры</a>, <a href="https://github.com/documentcloud/backbone/wiki/Tutorials%2C-blog-posts-and-example-sites">туториалы</a>, <a href="http://todomvc.com/architecture-examples/backbone/">TodoMVC</a></p>
+		<p><strong>Плагины:</strong> <a href="https://github.com/documentcloud/backbone/wiki/Extensions%2C-Plugins%2C-Resources">Список расширений и плагинов</a>, <a href="https://github.com/theironcook/Backbone.ModelBinder">ModelBinder</a>, <a href="http://rivetsjs.com/">Rivets.js</a>, <a href="https://github.com/powmedia/backbone-forms">Backbone-forms</a>, <a href="https://github.com/PaulUithol/Backbone-relational">Backbone-relational</a></p>
+		<p><strong>Фреймворки:</strong> <a href="https://github.com/tbranyen/backbone.layoutmanager">Backbone.LayoutManager</a>, <a href="http://chaplinjs.org/">Chaplin</a>, <a href="http://thoraxjs.org/">Thorax</a>, <a href="http://marionettejs.com/">Marionette.js</a></p>
+	</div></section>
+
+	<script src="shower/shower.js"></script>
+	<!-- Copyright © 2013 Maxim Sukharev, Ideco. -->
+</body>
+</html>
