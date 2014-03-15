@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Функциональное программирование в реальной жизни</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Функциональное программирование<br>в реальной жизни</h1>
+        <p>Максим Сухарев, Яндекс.</p>
+    </header>
+    <section class="slide cover" id="Cover"><div>
+        <h2>Функциональное программирование<br>в реальной жизни</h2>
+        <p><a href="http://smacker.ru">Максим Сухарев</a>, Яндекс</p>
+        <img src="pictures/cover.jpg" alt="">
+        <!--
+            To apply styles to the certain slides
+            set slide ID to get needed elements
+            -->
+        <style>
+            #Cover h2 {
+                margin:0 0 0 30%;
+                color:#111;
+                text-align:center;
+                font-size:80px;
+                text-shadow: #fff 0 0 1.5em;
+                }
+            #Cover p {
+                margin:10px 0 0 60%;
+                text-align:center;
+                color:#FFF;
+                font-style:italic;
+                font-size:24px;
+                text-shadow: #000 0 0 1.5em;
+                }
+                #Cover p a {
+                    color:#FFF;
+                    }
+        </style>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Что</h2>
+        <p><strong>Функциональное программирование</strong> – стиль программирование при котором последовательный вызов функций, без сохранения состояний, является результатом работы программы.</p>
+        <p>ФП возможно в языках где функции это <strong>объекты первого класса</strong>.</p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Зачем</h2>
+        <ul>
+            <li>Нет побочных эффектов</li>
+            <li>Более надежный код</li>
+            <li>Легко тестировать</li>
+            <li>Легко распределять</li>
+            <li>Оптимизация при компиляции и Ленивость*</li>
+        </ul>
+        <p class="note">* к сожалению, не в javascript.</p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Как</h2>
+        <p>Задача: Отобразить список элементов на странице.</p>
+        <p>Разделение проблемы на части (функции).</p>
+        <p>loadDataFromServer &rarr; parseData &rarr; transformData &rarr; makeHTML &rarr; processHTML &rarr; modifyDOM.</p>
+    </div></section>
+    <section class="slide shout"><div>
+        <h2>Конвейер</h2>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Рецепт</h2>
+        <ol>
+            <li>Выделение абстракций</li>
+            <li>Создание функций</li>
+            <li>Создание абстракций используя функции</li>
+            <li>Передача функций в функции</li>
+        </ol>
+    </div></section>
+    <section class="slide"><div>
+        <h2>В чем отличие</h2>
+        <ul>
+            <li>"существительные" vs "глаголы"</li>
+            <li>взаимодействие vs передача аргументом</li>
+            <li>много микросостояний vs нет микросостояний</li>
+        </ul>
+    </div></section>
+    <section class="slide cover cover w h real-life"><div>
+        <img src="pictures/picture.jpg" alt="">
+    </div></section>
+    <section class="slide shout"><div>
+        <h2>Данные есть всегда</h2>
+    </div></section>
+    <section class="slide cover h"><div>
+        <img src="pictures/roden.jpg" alt="">
+    </div></section>
+    <section class="slide cover w"><div>
+        <img src="pictures/uml.png" alt="">
+    </div></section>
+    <section class="slide shout arr-obj"><div>
+        <h2>Array, Object</h2>
+        <p>+ Backbone.Collection, Backbone.Model</p>
+        <style>
+            .arr-obj p {
+                color: #666;
+                position: absolute;
+                bottom: 10%;
+                right: 20%;
+                text-align: right;
+            }
+        </style>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Базовые функции</h2>
+        <ul>
+            <li>forEach, reduce, keys, map, filter, ...</li>
+            <li><a href="http://underscorejs.org">Underscore.js</a> – must have</li>
+            <li><a href="http://lodash.com/">Lodash</a> - оно же, но быстрее</li>
+            <li><a href="http://epeli.github.io/underscore.string/">Underscore.string</a> - работа со строками</li>
+            <li><a href="https://github.com/documentcloud/underscore-contrib">Underscore.contrib</a> - на все случаи жизни</li>
+            <li><a href="https://github.com/sharikul/FuncJS">FuncJS</a> - просто нагуглилось</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Задача</h2>
+        <ul>
+            <li>Сортировка по displayName</li>
+            <li>displayName - вычисляемое поле Фамилия+Имя</li>
+            <li>Группировка по первой букве lastName</li>
+            <li>В номере телефона есть 789</li>
+            <li>Нет скайпа</li>
+        </ul>
+    </div></section>
+    <section class="slide fuuuu codeslide"><div>
+        <h2>Кунфу</h2>
+        <pre style="font-size:18px;">
+            <code>_.groupBy(_.sortBy(_.filter( _.map(_.map(_.reject(contacts, function(contact) {</code>
+            <code>    return !!contact.skype;</code>
+            <code>}), function(contact) {</code>
+            <code>    return _.defaults(contact, {firstName: '', lastName: ''});</code>
+            <code>}), function(contact) {</code>
+            <code>    var displayName = [contact.lastName + ' ' + contact.firstName).trim();</code>
+            <code>    return _.extend({}, contact, {displayName: displayName});</code>
+            <code>}), function(contact) {</code>
+            <code>    return _.any(contact.phones, function(phone) {</code>
+            <code>        return _.indexOf(phone, '789') !== -1;</code>
+            <code>    });</code>
+            <code>}), 'displayName'), function(contact) {</code>
+            <code>    return contact.lastName[0];</code>
+            <code>});</code>
+        </pre>
+        <style>
+            .fuuuu pre code {
+                line-height:28px;
+            }
+        </style>
+    </div></section>
+    <section class="slide codeslide"><div>
+        <h2>Читабельность</h2>
+        <pre>
+            <code><mark class="comment">// Наша главная функция</mark></code>
+            <code>function <mark>processData</mark>(data, processors) {</code>
+            <code>  return _.<mark>reduce</mark>(processors, function(data, processor) {</code>
+            <code>     return processor(data);</code>
+            <code>  }, data);</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+    <section class="slide codeslide"><div>
+        <h2>Понятные имена</h2>
+        <pre>
+            <code>function <mark>contactsSetDefaults</mark>(data) {</code>
+            <code>  return _.<mark>map</mark>(data, function(contact) {</code>
+            <code>    return _.<mark>defaults</mark>(contact, {</code>
+            <code>      firstName: '', lastName: ''</code>
+            <code>    });</code>
+            <code>  });</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+    <section class="slide codeslide"><div>
+        <h2>Абстракции</h2>
+        <pre>
+            <code><mark class="comment">// Имя тоже абстрактно</mark></code>
+            <code>function <mark>filterFalsyField</mark>(fieldName, data) {</code>
+            <code>  return _.<mark>reject</mark>(data, function(item) {</code>
+            <code>    return !!item[<mark>fieldName</mark>];</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+    <section class="slide codeslide"><div>
+        <h2>Можно оптимизировать</h2>
+        <pre>
+            <code>function <mark>addDisplayName</mark>(data) {</code>
+            <code>  <mark class="comment">// Можно здесь же запомнить вычисление</mark></code>
+            <code>  return _.map(data, _.<mark>memoize</mark>(function(contact) {</code>
+            <code>    return _.<mark>extend</mark>({}, contact, {</code>
+            <code>      displayName: (contact.lastName + ' '</code>
+            <code>        + contact.firstName).trim()</code>
+            <code>    });</code>
+            <code>  }, _.<mark>property</mark>('id')));</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+    <section class="slide codeslide codelist"><div>
+        <h2>Абстракции нужно делать умными</h2>
+        <pre>
+            <code>function <mark>searchInField</mark>(field, searchString, data) {</code>
+            <code>  return _.<mark>filter</mark>(data, function(item) {</code>
+            <code>    var value = _.<mark>result</mark>(item[_.result(field)]);</code>
+            <code>    if (_.<mark>isString</mark>(value)) {</code>
+            <code>        return _.indexOf(value, searchString) !== -1;</code>
+            <code>    } else if (_.<mark>isArray</mark>(value)) {</code>
+            <code>        return _.<mark>any</mark>(value, function(subItem) {</code>
+            <code>            return _.indexOf(subItem, searchString) !== -1;</code>
+            <code>        });</code>
+            <code>    } else {</code>
+            <code>        return false;</code>
+            <code>    }</code>
+            <code>  });</code>
+            <code>}</code>
+        </pre>
+        <style>
+        .codeslide div {
+            margin-top: -30px;
+        }
+        .codelist pre code {
+            font-size: 0.8em;
+            line-height: 1.6em;
+        }
+        </style>
+    </div></section>
+    <section class="slide codeslide codelist"><div>
+        <h2>Рефакторинг</h2>
+        <pre>
+            <code>processData(contacts, [</code>
+            <code>    contactsSetDefaults,</code>
+            <code>    _.<mark>wrap</mark>(<span style="color:#00a33f">'skype'</span>, filterFalsyField),</code>
+            <code>    addDisplayName,</code>
+            <code>    _.<mark>partial</mark>(searchInField, <span style="color:#00a33f">'phone'</span>, <span style="color:#00a33f">'789'</span>),</code>
+            <code>    <span style="color:#ff5600">function</span>(data) {</code>
+            <code>        <span style="color:#ff5600">return</span> _.<mark>sortBy</mark>(data, <span style="color:#00a33f">'displayName'</span>)</code>
+            <code>    },</code>
+            <code>    _.<mark>partialRight</mark>(_.<mark>groupBy</mark>, <span style="color:#ff5600">function</span>(contact) {</code>
+            <code>        <span style="color:#ff5600">return</span> contact.lastName[0];</code>
+            <code>    }))</code>
+            <code>]);</code>
+        </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Итого</h2>
+        <ul>
+            <li>понятный, надежный, легко расширяемый и модифицируемый код</li>
+            <li>общие абстракции</li>
+            <li>функции для решения задачи</li>
+            <li>множество базовых функций</li>
+            <li>как в реальной жизни!</li>
+        </ul>
+    </div></section>
+    <section class="slide shout"><div>
+        <h2>Спасибо</h2>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Полезная информация</h2>
+        <ul>
+            <li>Functional Javascript, Michael Fogus</li>
+            <li>Исходники undercore.js</li>
+            <li>React, Bacon.js</li>
+        </ul>
+        <h2>Контакты</h2>
+        <ul>
+            <li>Twitter: <a href="http://twitter.com/MaximSukharev">@MaximSukharev</a></li>
+            <li>E-mail: <a href="mailto:max@smacker.ru">max@smacker.ru</a></li>
+        </ul>
+    </div></section>
+    <!--
+        To hide progress bar from entire presentation
+        just remove “progress” element.
+        -->
+    <div class="progress"><div></div></div>
+    <script src="shower/shower.min.js"></script>
+    <!-- Copyright © 2013 Yours Truly, Famous Inc. -->
+    <!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>
