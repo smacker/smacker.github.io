@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <title>Tornado - это не только web-сайты</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/print.css" media="print">
+    <!--
+        To apply styles to the certain slides
+        set slide ID to get needed elements
+        -->
+    <style>
+        #Cover h2 {
+            margin:125px 0 0;
+            color:#FFF;
+            text-align:center;
+            font-size:70px;
+            }
+        #CatNice h2, #CatNice ul,
+        #CatBad h2, #CatBad ul {
+            color:#FFF;
+            }
+        #CatNice ul {
+            width: 50%;
+        }
+        #CatBad ul {
+            width: 60%;
+        }
+        #CatNice img, #CatBad img {
+            left: auto;
+            right: 0;
+        }
+        .alotcode pre code {
+            font-size: 50%;
+            line-height: 18px;
+        }
+        #End p {
+            text-align: center;
+            font: bold 140px/1 "PT Sans Narrow", sans-serif;
+            color: #666;
+            padding-top: 60px;
+        }
+        #coffee {
+            position: absolute;
+            right: 130px;
+            top: 70px;
+        }
+        #new-schema img {
+           position: absolute;
+           top: 150px;
+           left: 120px;
+           width: 720px;
+           z-index: 0;
+           display: block;
+        }
+        #new-schema ul.first {
+            display: none;
+            z-index: 2;
+            background: #fff;
+            width: 340px;
+            height: 100%;
+        }
+        #new-schema ul.last {
+            display: none;
+            z-index: 2;
+            background: #fff;
+            margin-left:435px;
+            width: 340px;
+            height: 100%;
+            padding-left: 45px;
+            padding-top: 50px;
+        }
+        #new-schema ul.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Tornado - это не только web-сайты</h1>
+        <p><a href="http://vsinitsyn.ru/">Валентин Синицын</a>, <a href="http://smacker.ru">Максим Сухарев</a>, <a href="http://ideco.ru">Айдеко</a></p>
+    </header>
+    <section class="slide cover" id="Cover"><div>
+        <h2>Tornado - это не только<br>web-сайты</h2>
+        <img src="pictures/cover.jpg" alt="">
+    </div></section>
+    <section class="slide"><div>
+        <h2>Мы расскажем</h2>
+        <ol>
+            <li>Как мы делали это раньше</li>
+            <li>Почему нам это не нравилось и как мы пришли к Tornado</li>
+            <li>Как стало сейчас</li>
+            <li>Профит веб-разработчику</li>
+            <li>Tornado REST</li>
+            <li>Web Sockets</li>
+        </ol>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Что мы делаем</h2>
+        <p>Мы создаем специализированный дистрибутив Linux, а это:</p>
+        <ul>
+            <li class="next">&laquo;Солянка&raquo; из независимых, но связанных компонентов (web, скрипты, демоны Unix)</li>
+            <li class="next">Всевозможные модели обмена данными: <em>pull</em>, <em>push</em>, <em>pub/sub</em>.</li>
+            <li class="next">Отладка, в том числе непосредственно на &laquo;живых&raquo; системах</li>
+            <li class="next">Необходимость подавать команды и получать отклик из консоли</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Типичный Legacy</h2>
+        <img src="pictures/legacy.png" alt="">
+    </div></section>
+    <section class="slide"><div>
+        <h2>Что здесь не так?</h2>
+        <ul>
+            <li class="next"><b>Очереди сообщений Unix</b> (System V IPC) низкоуровневы и примитивны</li>
+            <li class="next">Много типового шаблонного кода для web</li>
+            <li class="next">Трудности с отладкой</li>
+            <li class="next">(Зачастую) необходимость дорабатывать стандартные компоненты</li>
+            <li class="next">RPC? Не, не слышал &copy;</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Варианты</h2>
+        <ul>
+            <li><b>D-Bus</b> &ndash; неплохо, но у нас не настольная система</li>
+            <li><b>ZeroMQ/AMQP</b> &ndash; удобные, гибкие (и даже поддерживаются Python), но
+нужен мост в web</li>
+        </ul>
+        <p>Кроме того, использовать D-Bus и ZeroMQ/AMQP из консоли/скриптов не так-то просто.</p>
+    </div></section>
+    <section class="slide shout"><div>
+        <h2>HTTP</h2>
+    </div></section>
+    <section class="slide" id="new-schema">
+        <img src="pictures/new.png" alt="">
+        <div>
+            <h2>Новое решение</h2>
+            <ul class="next first">
+                <li>Протокол обмена данными: HTTP</li>
+                <li>Клей: сервисы на базе Tornado</li>
+                <li>Взаимодействие с БД: стандартные библиотеки</li>
+                <li>Взаимодействие с web: REST API</li>
+            </ul>
+            <ul class="next last">
+                <li>Только ECMAScript, только хардкор</li>
+                <li>ExtJS/Backbone.js</li>
+                <li>Модульность: независимы, общение через сигналы</li>
+                <li>Только RESTful API (почти)</li>
+            </ul>
+            <div class="next remove"></div>
+        </div>
+    </section>
+    <section class="slide cover" id="CatNice"><div>
+        <h2>Вкусняшки</h2>
+        <ul>
+            <li class="next">Единый механизм обмена данными в системе и в web</li>
+            <li class="next">Возможность подавать команды прямо из командной строки Unix</li>
+            <li class="next">Возможность подключаться из фронт-енда напрямую к системным демонам</li>
+        </ul>
+        <img src="pictures/cat1.jpg" alt="">
+    </div></section>
+    <section class="slide cover" id="CatBad"><div>
+        <h2>Проблемы</h2>
+        <ul>
+            <li class="next">AMQP/ZeroMQ гибче: например, можно организовать отправку сообщения нескольким подписчикам с фильтрацией по ключу</li>
+            <li class="next">HTTP тяжелее: это текстовый (избыточный) протокол</li>
+            <li class="next">Нам хватает! HTTP достаточно гибок для наших задач, а серверы достаточно производительны, чтобы его выдержать</li>
+        </ul>
+        <img src="pictures/cat2.jpg" alt="">
+    </div></section>
+    <section class="slide"><div>
+        <h2>Но почему?!!</h2>
+        <ul>
+             <li class="next">Мы любим Python и много пишем на нем</li>
+             <li class="next">Нам нужен цикл сообщений, а не новая потоковая модель (Gevent, давай, до свидания!)</li>
+             <li class="next">Кривая обучения Tornado более пологая, чем в случае Twisted</li>
+             <li class="next">Цикл сообщений Tornado чаще поддерживается сторонними библиотеками (или нам просто везло?)</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Веб-разработчику</h2>
+        <ul>
+            <li class="next">Низкий порог вхождения.</li>
+            <li class="next">Неплохой фреймворк.</li>
+            <li class="next">Сам себе сервер.</li>
+            <li class="next">Удобства (tornado-utils).</li>
+            <li class="next">Можно вообще не писать Python-код</li>
+        </ul>
+    </div></section>
+    <section class="slide alotcode"><div>
+        <h2>Пример REST</h2>
+        <pre>
+            <code><span style="color: #ff7700;font-weight:bold;">class</span> ZoneHandler<span style="color: black;">&#40;</span>BaseHandler<span style="color: black;">&#41;</span>:</code>
+            <code>    type_choices = <span style="color: black;">&#40;</span><span style="color: #483d8b;">'master'</span>, <span style="color: #483d8b;">'slave'</span>, <span style="color: #483d8b;">'hint'</span>, <span style="color: #483d8b;">'stub'</span>, <span style="color: #483d8b;">'forward'</span>, <span style="color: #483d8b;">'delegation-only'</span><span style="color: black;">&#41;</span></code>
+            <code>    <span style="color: #ff7700;font-weight:bold;">def</span> get<span style="color: black;">&#40;</span><span style="color: #008000;">self</span>, <span style="color: #008000;">id</span>=<span style="color: #008000;">None</span><span style="color: black;">&#41;</span>:</code>
+            <code>        <span style="color: #ff7700;font-weight:bold;">if</span> <span style="color: #008000;">id</span> <span style="color: #ff7700;font-weight:bold;">is</span> <span style="color: #008000;">None</span>:</code>
+            <code>            zones = <span style="color: #008000;">self</span>.<span style="color: black;">db</span>.<span style="color: black;">query</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;select * from zones&quot;</span><span style="color: black;">&#41;</span> </code>
+            <code>            <span style="color: #ff7700;font-weight:bold;">if</span> zones <span style="color: #ff7700;font-weight:bold;">is</span> <span style="color: #008000;">None</span>:</code>
+            <code>                zones = <span style="color: black;">&#91;</span><span style="color: black;">&#93;</span></code>
+            <code>            <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span>zones<span style="color: black;">&#41;</span></code>
+            <code>            <span style="color: #ff7700;font-weight:bold;">return</span></code>
+            <code>        zone = <span style="color: #008000;">self</span>.<span style="color: black;">db</span>.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;select * from zones where id = ?&quot;</span>, <span style="color: #008000;">id</span><span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span>zone<span style="color: black;">&#41;</span><br><br></code>
+            <code>    <span style="color: #ff7700;font-weight:bold;">def</span> post<span style="color: black;">&#40;</span><span style="color: #008000;">self</span><span style="color: black;">&#41;</span>:</code>
+            <code>        lastrowid = <span style="color: #008000;">self</span>.<span style="color: black;">db</span>.<span style="color: black;">execute</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;&quot;&quot;<span></code>
+            <code>            <span style="color: #483d8b;">insert into zones (</span></code>
+            <code>                <span style="color: #483d8b;">'domain', 'type', 'ttl', 'primary', 'contact',</span></code>
+            <code>                <span style="color: #483d8b;">'serial', 'refresh', 'retry', 'expire', 'nttl'</span></code>
+            <code>            <span style="color: #483d8b;">)</span></code>
+            <code>            <span style="color: #483d8b;">values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</span></code>
+            <code>        <span style="color: #483d8b;">&quot;&quot;&quot;</span>, <span style="color: #66cc66;">*</span><span style="color: #008000;">self</span>._get_data<span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #ff7700;font-weight:bold;">return</span> <span style="color: #008000;">self</span>.<span style="color: black;">get</span><span style="color: black;">&#40;</span>lastrowid<span style="color: black;">&#41;</span></code>
+        </pre>
+    </div></section>
+    <section class="slide alotcode"><div>
+        <h2>Но чаще это выглядит так</h2>
+        <pre>
+            <code><span style="color: #ff7700;font-weight:bold;">class</span> ProfilesHandler<span style="color: black;">&#40;</span>BaseHandler<span style="color: black;">&#41;</span>:</code>
+            <code>    @perms_require_admin</code>
+            <code>    <span style="color: #ff7700;font-weight:bold;">def</span> get<span style="color: black;">&#40;</span><span style="color: #008000;">self</span>, group_id=<span style="color: #008000;">None</span><span style="color: black;">&#41;</span>:</code>
+            <code>        <span style="color: #ff7700;font-weight:bold;">if</span> <span style="color: #ff7700;font-weight:bold;">not</span> group_id:</code>
+            <code>            items = <span style="color: black;">&#40;</span><span style="color: #008000;">self</span>._get_item<span style="color: black;">&#40;</span><span style="color: #dc143c;">profile</span><span style="color: black;">&#41;</span> <span style="color: #ff7700;font-weight:bold;">for</span> <span style="color: #dc143c;">profile</span> <span style="color: #ff7700;font-weight:bold;">in</span> <span style="color: #008000;">self</span>._profiles.<span style="color: #008000;">list</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></code>
+            <code>            <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span><span style="color: #008000;">list</span><span style="color: black;">&#40;</span>items<span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></code>
+            <code>            <span style="color: #ff7700;font-weight:bold;">return</span></code>
+            <code>        <span style="color: #dc143c;">profile</span> = get_profile<span style="color: black;">&#40;</span>group_id<span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span><span style="color: #008000;">self</span>._get_item<span style="color: black;">&#40;</span><span style="color: #dc143c;">profile</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><br><br></code>
+            <code>    @perms_require_main_admin</code>
+            <code>    <span style="color: #ff7700;font-weight:bold;">def</span> post<span style="color: black;">&#40;</span><span style="color: #008000;">self</span><span style="color: black;">&#41;</span>:</code>
+            <code>        data = json.<span style="color: black;">loads</span><span style="color: black;">&#40;</span><span style="color: #008000;">self</span>.<span style="color: black;">request</span>.<span style="color: black;">body</span><span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #dc143c;">profile</span> = <span style="color: #008000;">self</span>._profiles.<span style="color: black;">add</span><span style="color: black;">&#40;</span>data.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'name'</span><span style="color: black;">&#41;</span>, data.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'comment'</span><span style="color: black;">&#41;</span>, data.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'categories'</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span><span style="color: #008000;">self</span>._get_item<span style="color: black;">&#40;</span><span style="color: #dc143c;">profile</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><br><br></code>
+            <code>    @perms_require_main_admin</code>
+            <code>    <span style="color: #ff7700;font-weight:bold;">def</span> delete<span style="color: black;">&#40;</span><span style="color: #008000;">self</span>, group_id<span style="color: black;">&#41;</span>:</code>
+            <code>        <span style="color: #008000;">self</span>._users.<span style="color: black;">del_profile_from_all</span><span style="color: black;">&#40;</span>group_id<span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #008000;">self</span>._profiles.<span style="color: black;">delete</span><span style="color: black;">&#40;</span>group_id<span style="color: black;">&#41;</span></code>
+            <code>        <span style="color: #008000;">self</span>.<span style="color: black;">finish</span><span style="color: black;">&#40;</span><span style="color: #008000;">dict</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></code>
+        </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>WebSocket</h2>
+        <ul>
+           <li class="next">Сервер <b>сам</b> сообщает о изменениях &ndash; polling не нужен</li>
+           <li class="next">Websocket &ndash; протокол полнодуплексной связи через TCP-соединение</li>
+           <li class="next">Кроссбраузерно &ndash; из коробки IE 10, Firefox 6+, Chrome 14+, Safari 6, Opera 12.1</li>
+           <li class="next">Старый браузер? Есть <b>SockJS</b>, <b>TornadIO2</b></li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>А откуда дровишки?</h2>
+        <ul>
+            <li>Database/ORM events, Daemons, Tornado</li>
+            <li>Любая очередь сообщений <b>RabbitMQ</b>, <b>ZeroMQ</b>, <b>Redis</b>, ...</li>
+            <li>Слушаем очередь из Tornado при помощи:<br>
+           <b>pika</b>, <b>brukva</b>, stormed-amqp, ...</li>
+           <li>Получили сообщение &ndash; переслали всем клиентам</li>
+        </ul>
+    </div></section>
+    <section class="slide alotcode"><div>
+        <h2>Пример Backend</h2>
+        <pre>
+            <code><span style="color:#ff7800">class</span> <span style="color:#3b5bb5">MyWebSocketHandler</span>(<span style="color:#3b5bb5;font-style:italic">websocket.WebSocketHandler</span>):</code>
+            <code>    <span style="color:#ff7800">def</span> <span style="color:#3b5bb5">open</span>(self, *args, **kwargs):</code>
+            <code>        self.application.pc.add_event_listener(self)</code>
+            <code>    <span style="color:#ff7800">def</span> <span style="color:#3b5bb5">on_close</span>(self):</code>
+            <code>        self.application.pc.remove_event_listener(self)<br><br></code>
+            <code><span style="color:#ff7800">class</span> <span style="color:#3b5bb5">PikaClient</span>(<span style="color:#3b5bb5;font-style:italic"><span style="color:#3b5bb5">object</span></span>):</code>
+            <code>    <span style="color:#ff7800">def</span> <span style="color:#3b5bb5">on_message</span>(self, channel, method, header, body):</code>
+            <code>        unpacked <span style="color:#ff7800">=</span> msgpack.loads(body)</code>
+            <code>        model <span style="color:#ff7800">=</span> unpacked[<span style="color:#3b5bb5">2</span>][<span style="color:#3b5bb5">0</span>]</code>
+            <code>        self.notify_listeners({</code>
+            <code>            <span style="color:#409b1c">'action'</span>: unpacked[<span style="color:#3b5bb5">1</span>],</code>
+            <code>            <span style="color:#409b1c">'model'</span>: model,</code>
+            <code>            <span style="color:#409b1c">'id'</span>: unpacked[<span style="color:#3b5bb5">2</span>][<span style="color:#3b5bb5">1</span>]</code>
+            <code>        })</code>
+            <code>    <span style="color:#ff7800">def</span> <span style="color:#3b5bb5">notify_listeners</span>(self, event_obj):</code>
+            <code>        event_json <span style="color:#ff7800">=</span> json.dumps(event_obj)</code>
+            <code>        <span style="color:#ff7800">for</span> listener <span style="color:#ff7800">in</span> self.event_listeners:</code>
+            <code>            listener.write_message(event_json)</code>
+        </pre>
+    </div></section>
+    <section class="slide alotcode"><div>
+        <h2>Пример Frontend</h2>
+        <img src="pictures/coffee.png" id="coffee">
+        <pre>
+            <code><span style="color:#ff7800">class</span> <span style="color:#3b5bb5">Socket</span></code>
+            <code>  <span style="color:#3b5bb5">connect:</span> <span style="color:#ff7800">-</span><span style="color:#ff7800">></span></code>
+            <code>    @ws <span style="color:#ff7800">=</span> <span style="color:#ff7800">new</span> WebSocket <span style="color:#409b1c">'ws://'</span><span style="color:#ff7800">+</span>document.location.host<span style="color:#ff7800"><span style="color:#ff7800">+</span><span style="color:#409b1c">'/ws'</span></code>
+            <code>    @ws.onopen <span style="color:#ff7800">=</span> (evt) => @onopen(evt)</code>
+            <code>    @ws.onmessage <span style="color:#ff7800">=</span> (evt) => @onmessage(evt)</code>
+            <code>    @ws.onerror <span style="color:#ff7800">=</span> (evt) => @onerror(evt)</code>
+            <code>    @ws.onclose <span style="color:#ff7800">=</span> (evt) => @onclose(evt)<br><br></code>
+            <code>  <span style="color:#3b5bb5">onmessage:</span> (evt) <span style="color:#ff7800">-</span><span style="color:#ff7800">></span></code>
+            <code>    data <span style="color:#ff7800">=</span> <span style="color:#3b5bb5">JSON</span>.parse(evt.data)</code>
+            <code>    @[data.action](data.model, data.id)</code>
+            <code>  <span style="color:#3b5bb5">added:</span> (model, id) <span style="color:#ff7800">-</span><span style="color:#ff7800">></span></code>
+            <code>    collection <span style="color:#ff7800">=</span> @collections_mapper[model]</code>
+            <code>    collection.create(id)</code>
+            <code>  <span style="color:#3b5bb5">changed:</span> (model, id) <span style="color:#ff7800">-</span><span style="color:#ff7800">></span></code>
+            <code>    collection <span style="color:#ff7800">=</span> @collections_mapper[model]</code>
+            <code>    collection.get(id).fetch()</code>
+            <code>  <span style="color:#3b5bb5">deleted:</span> (model, id) <span style="color:#ff7800">-</span><span style="color:#ff7800">></span></code>
+            <code>    collection <span style="color:#ff7800">=</span> @collections_mapper[model]</code>
+            <code>    collection.get(id).destroy()</code>
+        </pre>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Тестирование</h2>
+        <ul>
+            <li>В больших проектах с историей не избежать автоматизированного тестирования</li>
+            <li>Для интеграционных тестов мы используем Selenium: это долго и &laquo;хрупко&raquo;</li>
+            <li>HTTP REST API позволяет написать простой тест и включить его в CI</li>
+            <li>HTTP REST API позволяет легко создать mock и разрабатывать фронт-енд параллельно с бек-ендом</li>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Итого</h2>
+        <ul>
+            <li>Tornado позволяет системным и web-разработчикам говорить на одном языке</li>
+            <li>HTTP достаточно гибок, чтобы реализовать REST API или RPC и многие стандартные схемы обмена сообщениями</li>
+            <li>Его удобно использовать из консоли, из скриптов, да и вообще сложно найти, где не был бы реализован HTTP</li>
+            <li>Его удобно отлаживать, он клевый и на нем приятно писать ;)</li>
+        </ul>
+    </div></section>
+    <section class="slide" id="End"><div>
+        <h2>Спасибо за внимание</h2>
+        <p>Вопросы?</p>
+    </div></section>
+    <!--
+        To hide progress bar from entire presentation
+        just remove “progress” element.
+        -->
+    <div class="progress"><div></div></div>
+    <script src="shower/shower.js"></script>
+</body>
+</html>
